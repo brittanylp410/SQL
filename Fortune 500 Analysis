@@ -1,0 +1,31 @@
+#The average employee tenure in the Retail Industry
+SELECT company_name, avg_employee_tenure
+FROM fortune_companies
+WHERE industry = 'Retail';
+
+#Assign Healthcare companies based on amount of maternity leave provided as family friendly, acceptable, or not family friendly
+SELECT company_name,
+CASE WHEN 
+maternity_leave_weeks >=10 THEN 'family friendly'
+WHEN maternity_leave_weeks >=8 THEN 'acceptable'
+Else 'not family friendly'
+END AS family_friendly
+FROM fortune_companies
+WHERE industry = 'Healthcare';
+
+#Which company in the Technology industry as the most revenue
+SELECT industry, company_name, MAX(revenue)
+FROM fortune_companies
+WHERE industry ='Technology';
+
+#Which industry has the lowest revenue
+SELECT industry, min(revenue) AS revenue
+FROM fortune_companies
+GROUP BY industry
+Having revenue >=100;
+
+#Which company offers at least 20 paid days off and has healthcare benefits
+SELECT company_name
+FROM fortune_companies
+WHERE paid_time_off_days >=20
+AND healthcare_benefits=1;
